@@ -40,7 +40,7 @@ def uploadToAgent(p):
         print '{"err":1,"msg":"%s"}' % connection
 
 def zuzhuangData(tags = '', value = ''):
-    endpoint = "Agent"
+    endpoint = "bj1-10-112-165-69"
     metric = "check_http_code"
     key = "remotehttpcheck"
     timestamp = int(time.time())
