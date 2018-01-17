@@ -41,7 +41,7 @@ def uploadToAgent(p):
 
 def zuzhuangData(tags = '', value = ''):
     endpoint = "Agent"
-    metric = "userdefine"
+    metric = "check_http_code"
     key = "remotehttpcheck"
     timestamp = int(time.time())
     step = 60
