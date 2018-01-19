@@ -1,20 +1,23 @@
 #!/bin/sh
-p=`cat 1 | grep "Processor"| awk '{print $3}'`
-#echo $p
-m=`cat 1 | grep "Module" | awk '{print $3}'`   
-#echo $m
-echo  "$p $m" | while read n1 n2
-do
-    echo "Process_$n1"_"Module_$n2"
-done
-##echo "$p" 
-##echo "$m" 
-#a=`echo "$p" | awk '{print $1"_"$3}'`
-#b=`echo "$m" | awk '{print $1"_"$3}'`
-##echo $a
-##echo $b
-#for i ii in $a $b
+dimm_num=`hpasmcli -s "show dimm" | grep Processor | wc -l`
+
+Processor=(`hpasmcli -s "show dimm" | grep Processor | awk  '{print $1"_"$3}'`)
+#for i in ${Processor[@]}
 #do
-#echo $i $ii
+#echo $i
 #done
 
+Module=(`hpasmcli -s "show dimm" | grep Module | awk '{print $1"_"$3}'`)
+#for var in ${Module[@]}
+#do
+#echo $var
+#done
+
+res=$(
+for ((i=0;i<$dimm_num;i++))
+do
+    echo ${Processor[$i]}_${Module[$i]}
+done
+)
+
+echo "$res"
