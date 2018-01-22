@@ -16,13 +16,13 @@ do
 done
 )
 
-echo "$dimm_status" | while read name status
+echo "$dimm_status" | while read dimm_name status
 do
     if [ "$status" == "Ok" ];then
         status=0
     else
         status=1
     fi
-    curl -X POST -d "[{\"metric\": \"$name\", \"endpoint\": \"${host_name}\", \"timestamp\": $ts,\"step\": 60,\"value\": $status,\"counterType\": \"GAUGE\"}]" http://127.0.0.1:1988/v1/push
+    curl -X POST -d "[{\"metric\": \"$dimm_name\", \"endpoint\": \"${host_name}\", \"timestamp\": $ts,\"step\": 60,\"value\": $status,\"counterType\": \"GAUGE\"}]" http://127.0.0.1:1988/v1/push
 done
 
